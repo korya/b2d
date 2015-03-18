@@ -23,6 +23,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     portno = 8080 + i
     config.vm.network "forwarded_port", guest: portno, host: portno
   }
+  # Etcd
+  config.vm.network "forwarded_port", guest: 4001, host: 4001
   # Fake-S3 port
   config.vm.network "forwarded_port", guest: 4567, host: 4567
   # Postgres ports
