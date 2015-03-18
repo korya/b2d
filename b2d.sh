@@ -44,6 +44,15 @@ b2d() {
     gvim "$@" $(b2d dir)/Vagrantfile
     ;;
 
+  clean)
+    docker ps -qa | xargs docker rm
+    docker images -qa | xargs docker rmi
+    docker run --rm \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v /var/lib/docker:/var/lib/docker \
+      planitar/docker-cleanup-volumes
+    ;;
+
   *) vagrant "$cmd" $id "$@" ;;
 
   esac
