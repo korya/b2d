@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.network "private_network", ip: "10.211.55.51"
   # config.vm.synced_folder <HOST-DIR>, <B2D-DIR>
   synced_dir = ENV["HOME"] + "/dev"
-  config.vm.synced_folder synced_dir, synced_dir, id: "b2d" #, type: "nfs"
+  config.vm.synced_folder synced_dir, synced_dir, id: "b2d", type: "nfs"
 
   # WWW ports: [8000, 8020), [8080, 8100)
   20.times { |i|
