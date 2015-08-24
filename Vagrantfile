@@ -33,6 +33,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Redis port
   config.vm.network "forwarded_port", guest: 6379, host: 6379
 
+  config.vm.provider :virtualbox do |v|
+    v.name = "b2d"
+  end
+
   config.vm.provider :parallels do |v|
     v.name = "b2d"
     v.memory = 2024
