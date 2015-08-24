@@ -16,8 +16,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   synced_dir = ENV["HOME"] + "/dev"
   config.vm.synced_folder synced_dir, synced_dir, id: "b2d"
 
-  # WWW ports: [8000, 8020), [8080, 8100)
-  20.times { |i|
+  # WWW ports: [8000, 8010), [8080, 8090)
+  10.times { |i|
     portno = 8000 + i
     config.vm.network "forwarded_port", guest: portno, host: portno
     portno = 8080 + i
@@ -57,4 +57,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       date
     EOT
   end
+
 end
