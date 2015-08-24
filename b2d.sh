@@ -18,6 +18,24 @@ b2d() {
     export DOCKER_HOST="tcp://${ip}:2375"
     ;;
 
+  up)
+    (
+      cd $(b2d dir)
+      vagrant up
+      set -x;
+      vagrant ssh -c " \
+        sudo sh -c 'echo \"export DOCKER_TLS=no\" \
+          >/var/lib/boot2docker/profile'; \
+        sudo sh -c 'echo \"export EXTRA_ARGS=\\\"--dns=172.17.42.1 --dns-search=prd.plntr.ca\\\"\" \
+          >>/var/lib/boot2docker/profile'; \
+      "
+      vagrant reload
+      set +x;
+    )
+    b2d config
+    docker info
+    ;;
+
   ntp)
     vagrant ssh $id -- sudo /usr/local/bin/ntpclient -s -h pool.ntp.org
     vagrant ssh $id -- date -u
